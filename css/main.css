@@ -7,7 +7,9 @@
     
     src: url('../fonts/Hortensia.ttf');
 }
-
+.no-samovivoz{
+      width: 100%;
+    }
 @font-face{
     font-family: 'LifehackSans';
     font-weight: normal;
@@ -181,17 +183,25 @@ label.error {
     background: #000;
 }
 
-@media (min-width: 767px) and (max-width: 1200px) {
-    body
-    {
-                zoom: 88%;
-        -moz-transform: scale(.88);
-        -moz-transform-origin: center top; 
-
-            -ms-zoom: 88%;
-        -webkit-zoom: 88%;
+@media (min-width: 960px) and (max-width: 1366px) {
+      body {
+                zoom: 75%;
+            -ms-zoom: 75%;
+        -webkit-zoom: 75%;
+        -moz-transform: scale(.75);
+        -moz-transform-origin: center top;
+      }
     }
-}
+    
+    @media (min-width: 767px) and (max-width: 959px) {
+      body {
+                zoom: 60%;
+            -ms-zoom: 60%;
+        -webkit-zoom: 60%;
+        -moz-transform: scale(.60);
+        -moz-transform-origin: center top;
+      }
+    }
 
 select {
     height: 40px;
