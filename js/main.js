@@ -1,10 +1,12 @@
 "use strict";
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+[].forEach.call(document.querySelectorAll('img[data-src]'), function(img) { img.setAttribute('src', img.getAttribute('data-src')); img.onload = function() { img.removeAttribute('data-src'); }; });
 $(function () {
   jQuery(document).ready(function ($) {
     var _$$slick;
+
+    $("#you_need_payout_order").hide();
 
     var scrollPos = 0;
     $(window).scroll(function () {
@@ -209,7 +211,6 @@ $(function () {
         sessionStorage.setItem('cart', JSON.stringify(products));
       }
 
-      console.log(tovar_shap);
       itog();
     } // Получаем из хранилища
 
@@ -231,7 +232,6 @@ $(function () {
 
           var tovar_shap = products[key]['tovar_shap']; // Цена
 
-          console.log(tovar_shap);
           var classes = '';
 
           if (products[key]['tovar_shap'] === 'tovarshap') {
@@ -276,9 +276,18 @@ $(function () {
       }
 
       var skid1 = 0;
-
+      if (price < 2500){
+        $('.minusdost').text('+300 ₽')
+      }else{
+        $('.minusdost').text('+0 ₽')
+      }
       if ($("[name='sdek']:checked").attr('data-price')) {
-        price = price + 300;
+        if (price < 2500){
+          price = price + 300;
+          $('.minusdost').text('+300 ₽')
+        }else{
+          $('.minusdost').text('+0 ₽')
+        }
       }
 
       if ($("[name='card']:checked").attr('data-price')) {
@@ -327,7 +336,7 @@ $(function () {
       $('[name="oplata"]').val($("[name='card']:checked").parents('.radio').find('.title').text());
       $('[name="dostav"]').val($("[name='sdek']:checked").parents('.radio').find('.title').text());
       $('.cart-products .itog .total small, .cart-senk .itog small, .cart-dost .itog small, .cart-opl .itog, .mob-itog small').text(price + ' ₽');
-      $('.cart-opl .btn-orange small').text('Оплатить ' + price + ' ₽');
+      $('.cart-opl .btn-orange small').text('Продолжить');
     } // Купоны
 
 
@@ -410,6 +419,27 @@ $(function () {
     });
     jQuery(document).on('click', "[href='#oform']", function (e) {
       e.preventDefault();
+
+      $('.opl1').text($('[name="card"]:checked').attr('data-titlemb'))
+
+     if ($("[name='sdek']:checked").hasClass('samovivoz')){
+      $('.nosamovivoz').hide();
+      $('.no-samovivoz').show();
+      $('.nosamovivoz input').prop('required', false);
+       $('.dst').text('Самовывоз')
+       $('.no-samovivoz input').prop('required', true);
+     }else  {
+       $('.nosamovivoz').show();
+       $('.nosamovivoz input').prop('required', true);
+       $('.dst').text('Доставка ТК +300Р')
+       $('.no-samovivoz').hide();
+       $('.no-samovivoz input').prop('required', false);
+
+     }
+
+
+      $("[name='namechild']").prop('required', false);
+
       $('body').addClass('oh1');
       $('.cart').hide();
       $('.cart-dost').show();
@@ -428,7 +458,7 @@ $(function () {
       $('.cart-products').show();
       $('body').removeClass('oh1');
       $('.cart-products').removeClass('active');
-      $('.cart-products .sidebar').fadeOut(300);
+      $('.cart-products .sidebar').fadeIn(300);
     });
     jQuery(document).on('click', ".bac1", function (e) {
       e.preventDefault();
@@ -449,74 +479,23 @@ $(function () {
         scrollTop: destination
       }, 1100);
     });
+
+
     $(".cart-dost").submit(function (e) {
       e.preventDefault();
 
       if ($('.card-popup:checked').length) {
         $('.cart').hide();
         $('.cart-opl').show();
+        $('.opl1').text('Самовывоз')
       } else {
-        var form_data = $(this).serialize();
-        var textitems = '';
-        var products = JSON.parse(sessionStorage.getItem('cart'));
 
-        for (var _key in products) {
-          if (products.hasOwnProperty(_key)) {
-            var title = products[_key]['name']; // Заголовок
-
-            var img = products[_key]['img']; // Изображение
-
-            var id = products[_key]['idtovar']; // ID
-
-            var price = products[_key]['price']; // Цена
-
-            var color_sel = products[_key]['color_sel']; // Цена
-
-            var colors = products[_key]['colors']; // Цена
-
-            var size_sel = products[_key]['size_sel']; // Цена
-
-            var data_color = products[_key]['data_color']; // Цена
-
-            var color_name = products[_key]['color_name']; // Цена
-
-            var item = '<div class="tovar" data-id="' + id + '"><div class="item">' + '<div class="title">' + title + '</div></div><div class="item">' + '<div class="size">Размер:' + size_sel + '</div></div><div class="item">' + '<div class="color">Цена: ' + price + '</div></div><hr><br>';
-            textitems += item;
-          }
-        }
-
-        form_data += "&itog=" + $('.cart-senk .itog small').text() + "&textmail=" + textitems;
-
-        if (sessionStorage.getItem('coupon')) {
-          form_data += "&coupon=Купон на " + sessionStorage.getItem('coupon') + '%';
-        }
-
-        $.ajax({
-          type: "POST",
-          url: "send.php",
-          data: form_data,
-          success: function success(data) {
-            $(".cart-senk").show();
-            $(".cart-dost").hide();
-            $('.cart').hide();
-            $('.cart.cart-senk').show();
-            sessionStorage.removeItem('cart');
-            sessionStorage.removeItem('coupon');
-            $('body').removeClass('oh1');
-            $('.tovar').remove();
-            $('.cart-fix').hide();
-            $('.cart-fix').addClass('nocart');
-            $('.shap .podar .item .button button.del').hide();
-            $('.shap .podar .item .button button.add').show();
-            var destination = +$('.cart-senk').offset().top - 80;
-            $('body,html').animate({
-              scrollTop: destination
-            }, 1100);
-            $('.shapbtn').slideUp(300);
-          }
-        });
+        let form_data = collectOrderParameters();
+        
+        sendAjaxRequest(form_data, 'zayavka');
       }
     });
+    
     jQuery(document).on('click', ".mob-menu", function () {
       jQuery(".mob-header").fadeToggle(500);
       $('body').toggleClass('oh');
@@ -568,22 +547,6 @@ $(function () {
       $(this).parents('.color').find('.title span').attr('style', $(this).attr('style'));
       tovar();
     });
-
-    if ($(window).width() <= 991) {} // $("footer form").submit(function (e) {
-    //     e.preventDefault();
-    //     var form_data = $(form).serialize();
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "send.php",
-    //         data: form_data,
-    //         success: function () {
-    //             $(".modal").modal('hide');
-    //             $("#senk").modal('show');
-    //         }
-    //     });
-    //     return false
-    // });
-
 
     $('.slider_photo').slick({
       infinite: false,
@@ -674,4 +637,21 @@ $(function () {
     });
     /*$("#myModalBox").modal('show');*/
   });
+
+  $( "#payout" ).submit(function( event ) {
+    event.preventDefault();
+    
+    let form_data = collectOrderParameters();
+  
+    sendAjaxRequest(form_data, 'zakaz', function (data) {
+      
+      $("#link_unitpay").attr("href", data);
+    
+      if ($("[id='payment_with_card']").prop('checked')) {
+        $("#you_need_payout_order").show();
+      }
+    });
+
+  });
+
 });
