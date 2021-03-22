@@ -3621,13 +3621,13 @@ h2.title {
     display: flex;
     padding-top: 95px;
     padding-bottom: 30px;
-    background: url('../img/webp/shap-flex.png') center bottom no-repeat; 
+    background: url('../img/webp/shap-flex.jpg') center bottom no-repeat; 
 
     justify-content: space-between;
 }
 
 .no-webp header.header .container:after {
-    background-image: url('../img/shap-flex.png');
+    background-image: url('../img/shap-flex.jpg');
 }
 
 .shap .flex.flex-mob {
