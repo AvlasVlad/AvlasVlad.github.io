@@ -458,7 +458,7 @@ $(function () {
       $('.cart-products').show();
       $('body').removeClass('oh1');
       $('.cart-products').removeClass('active');
-      $('.cart-products .sidebar').fadeIn(300);
+      $('.cart-products .sidebar').fadeOut(300);
     });
     jQuery(document).on('click', ".bac1", function (e) {
       e.preventDefault();
