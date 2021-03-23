@@ -4333,12 +4333,11 @@ h2.title {
         margin-left: 4px;
         padding: 5px;
     }
-    .dost .container > .item:last-child .logos .item img
-    {
-        width: auto; 
-        max-height: 80%;
+    .dost .container > .item:last-child .logos .item img {
+        max-height: 50px;
+        width: auto;
+      }
     }
-}
 
 .dost .container > .item:last-child .orang {
     width: 200px;
