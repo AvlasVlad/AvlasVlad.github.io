@@ -9,6 +9,7 @@
 		url('MuseoSansCyrl-500.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -20,6 +21,7 @@
 		url('MuseoSansCyrl-300Italic.ttf') format('truetype');
 	font-weight: 300;
 	font-style: italic;
+	font-display: swap;
 }
 
 @font-face {
@@ -31,6 +33,7 @@
 		url('MuseoSansCyrl-500Italic.ttf') format('truetype');
 	font-weight: normal;
 	font-style: italic;
+	font-display: swap;
 }
 
 @font-face {
@@ -42,6 +45,7 @@
 		url('MuseoSansCyrl-900.ttf') format('truetype');
 	font-weight: bold;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -53,6 +57,7 @@
 		url('MuseoSansCyrl-700.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -64,6 +69,7 @@
 		url('MuseoSansCyrl-700Italic.ttf') format('truetype');
 	font-weight: normal;
 	font-style: italic;
+	font-display: swap;
 }
 
 @font-face {
@@ -75,6 +81,7 @@
 		url('MuseoSansCyrl-300.ttf') format('truetype');
 	font-weight: 300;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -86,6 +93,7 @@
 		url('MuseoSansCyrl-100.ttf') format('truetype');
 	font-weight: 300;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -97,6 +105,7 @@
 		url('MuseoSansCyrl-100Italic.ttf') format('truetype');
 	font-weight: 300;
 	font-style: italic;
+	font-display: swap;
 }
 
 @font-face {
@@ -108,4 +117,5 @@
 		url('MuseoSansCyrl-900Italic.ttf') format('truetype');
 	font-weight: bold;
 	font-style: italic;
+	font-display: swap;
 }

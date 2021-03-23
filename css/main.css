@@ -4,7 +4,7 @@
     font-family: 'Hortensia';
     font-weight: normal;
     font-style: normal;
-    
+    font-display: swap;
     src: url('../fonts/Hortensia.ttf');
 }
 .no-samovivoz{
@@ -15,6 +15,7 @@
     font-weight: normal;
     font-style: normal;
     src: url('../fonts/LifehackSans.ttf');
+    font-display: swap;
 }
 
 @font-face {
@@ -22,6 +23,7 @@
     font-weight: normal;
     font-style: normal;
     src: url('../fonts/ALove.ttf');
+    font-display: swap;
 }
 
 @font-face {
@@ -29,6 +31,7 @@
     font-weight: normal;
     font-style: normal;
     src: url('../fonts/Lifehack.ttf');
+    font-display: swap;
 }
 
 html {
